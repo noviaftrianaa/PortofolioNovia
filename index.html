@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portofolio Novia Fitriana Huda</title>
+<style>
+  :root {
+    --color-primary: #6c63ff;
+    --color-light: #f9f9f9;
+    --color-dark: #222;
+    --color-text-light: #fff;
+    --color-text-dark: #333;
+    --transition: 0.3s ease;
+  }
+  [data-theme="dark"] {
+    --color-primary: #a093ff;
+    --color-light: #121212;
+    --color-dark: #eee;
+    --color-text-light: #ddd;
+    --color-text-dark: #eee;
+    background-color: var(--color-light);
+    color: var(--color-text-light);
+  }
+
+  /* Reset */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-light);
+    color: var(--color-text-dark);
+    transition: background-color var(--transition), color var(--transition);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  header {
+    background: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 2rem 1rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header h1 {
+    margin: 0 0 0.5rem;
+    font-size: 2.5rem;
+    animation: fadeInDown 1s ease forwards;
+  }
+  header p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    animation: fadeInDown 1s ease forwards;
+    animation-delay: 0.3s;
+  }
+
+  nav {
+    background: var(--color-dark);
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem 0;
+  }
+  nav a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color var(--transition);
+  }
+  nav a:hover,
+  nav a:focus {
+    color: var(--color-primary);
+    outline: none;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  section {
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  h2 {
+    color: var(--color-primary);
+    border-bottom: 3px solid var(--color-primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 1.5rem;
+    padding-left: 0;
+    list-style: none;
+  }
+  .project-list li {
+    background: white;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .project-list li:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  }
+  .project-list img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+  }
+  .project-list .desc {
+    padding: 1rem;
+    color: #444;
+  }
+  [data-theme="dark"] .project-list li {
+    background: #333;
+    color: #ddd;
+    box-shadow: 0 3px 8px rgba(255 255 255 / 0.15);
+  }
+  [data-theme="dark"] .project-list .desc {
+    color: #ccc;
+  }
+
+  /* Contact form */
+  form {
+    max-width: 400px;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+  [data-theme="dark"] form {
+    background: #222;
+    box-shadow: 0 3px 10px rgba(255 255 255 / 0.1);
+  }
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    border: 1.5px solid #ccc;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color var(--transition);
+  }
+  input:focus, textarea:focus {
+    border-color: var(--color-primary);
+    outline: none;
+  }
+  [data-theme="dark"] input, [data-theme="dark"] textarea {
+    background: #444;
+    border-color: #666;
+    color: #eee;
+  }
+  button[type="submit"] {
+    background: var(--color-primary);
+    color: var(--color-text-light);
+    font-weight: 700;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color var(--transition);
+  }
+  button[type="submit"]:hover {
+    background: #574fcf;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    color: #666;
+    padding: 1.5rem 1rem;
+    border-top: 1px solid #ddd;
+    margin-top: 3rem;
+  }
+  [data-theme="dark"] footer {
+    color: #aaa;
+    border-top: 1px solid #444;
+  }
+
+  /* Dark mode toggle button */
+  .dark-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: var(--color-primary);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: var(--color-text-light);
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    transition: background-color var(--transition);
+    z-index: 1000;
+  }
+  .dark-toggle:hover {
+    background: #574fcf;
+  }
+
+  /* Animations */
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.8rem;
+    }
+    nav {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<button class="dark-toggle" aria-label="Toggle Dark Mode">🌙</button>
+
+<header>
+  <h1>Novia Fitriana Huda</h1>
+  <p>Mahasiswa Teknik Informatika | Web Developer & Tech Enthusiast</p>
+</header>
+
+<nav>
+  <a href="#about" tabindex="0">Tentang Saya</a>
+  <a href="#projects" tabindex="0">Proyek</a>
+  <a href="#contact" tabindex="0">Kontak</a>
+</nav>
+
+<main>
+  <section id="about" tabindex="0">
+    <h2>Tentang Saya</h2>
+    <p>Saya adalah mahasiswa aktif Teknik Informatika Universitas Lampung yang sangat tertarik dengan pengembangan aplikasi web, UI/UX, serta teknologi terbaru. Saya memiliki pengalaman dalam membuat berbagai proyek aplikasi web dan aktif mengembangkan kemampuan pemrograman saya.</p>
+  </section>
+
+  <section id="projects" tabindex="0">
+    <h2>Proyek Saya</h2>
+    <ul class="project-list" aria-label="Daftar proyek">
+      <li tabindex="0" role="article">
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80" alt="DailyTask App Screenshot" />
+        <div class="desc"><strong>DailyTask</strong> - Aplikasi manajemen tugas harian dengan fitur reminder dan progress tracking.</div>
+      </li>
+      <li tabindex="0" role="article">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="PicMatic App Screenshot" />
+        <div class="desc"><strong>PicMatic</strong> - Platform fotografi kreatif dengan filter real-time dan efek khusus.</div>
+      </li>
+      <li tabindex="0" role="article">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="CourseSchedule App Screenshot" />
+        <div class="desc"><strong>CourseSchedule</strong> - Sistem jadwal kuliah berbasis web dengan fitur login dan pengelolaan jadwal kuliah.</div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="contact" tabindex="0">
+    <h2>Kontak</h2>
+    <form id="contact-form" novalidate>
+      <label for="name">Nama</label>
+      <input type="text" id="name" name="name" placeholder="Nama lengkap" required minlength="3" />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="email@example.com" required />
+
+      <label for="message">Pesan</label>
+      <textarea id="message" name="message" rows="4" placeholder="Tulis pesan kamu..." required minlength="10"></textarea>
+
+      <button type="submit">Kirim</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Novia Fitriana Huda
+</footer>
+
+<script>
+  // Scroll animation for sections
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach(section => observer.observe(section));
+
+  // Dark mode toggle
+  const toggleBtn = document.querySelector('.dark-toggle');
+  const html = document.documentElement;
+
+  function setDarkMode(enabled) {
+    if (enabled) {
+      html.setAttribute('data-theme', 'dark');
+      toggleBtn.textContent = '☀️';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      html.removeAttribute('data-theme');
+      toggleBtn.textContent = '🌙';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
+  // Load theme from storage
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    setDarkMode(true);
+  } else {
+    setDarkMode(false);
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    if (html.getAttribute('data-theme') === 'dark') {
+      setDarkMode(false);
+    } else {
+      setDarkMode(true);
+    }
+  });
+
+  // Contact form validation & submit simulation
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    // Basic validation
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    if (name.length < 3) {
+      alert('Nama harus minimal 3 karakter.');
+      form.name.focus();
+      return;
+    }
+    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      alert('Email tidak valid.');
+      form.email.focus();
+      return;
+    }
+    if (message.length < 10) {
+      alert('Pesan harus minimal 10 karakter.');
+      form.message.focus();
+      return;
+    }
+
+    alert('Terima kasih, pesan Anda sudah terkirim!');
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
